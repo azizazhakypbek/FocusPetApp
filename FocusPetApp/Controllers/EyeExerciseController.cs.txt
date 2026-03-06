@@ -1,0 +1,60 @@
+using System;
+using System.Windows.Threading;
+
+namespace FocusPetApp.Controllers
+{
+    public class EyeExerciseController
+    {
+        public event Action<string>? StepChanged;
+        public event Action<string>? AnimationRequested;
+        public event Action? Completed;
+
+        private DispatcherTimer _timer;
+        private int _stepIndex = 0;
+
+        private string[] _steps = new[]
+        {
+            "Look left ↔ right",
+            "Look up ↕ down",
+            "Near / Far focus",
+            "Slow blink",
+            "Relax eyes"
+        };
+
+        private string[] _animations = new[]
+        {
+            "left_right",
+            "up_down",
+            "near_far",
+            "blink",
+            "idle"
+        };
+
+        public EyeExerciseController()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(20);
+            _timer.Tick += (s, e) =>
+            {
+                _stepIndex++;
+                if (_stepIndex >= _steps.Length)
+                {
+                    _timer.Stop();
+                    Completed?.Invoke();
+                    return;
+                }
+
+                StepChanged?.Invoke(_steps[_stepIndex]);
+                AnimationRequested?.Invoke(_animations[_stepIndex]);
+            };
+        }
+
+        public void Start()
+        {
+            _stepIndex = 0;
+            StepChanged?.Invoke(_steps[_stepIndex]);
+            AnimationRequested?.Invoke(_animations[_stepIndex]);
+            _timer.Start();
+        }
+    }
+}

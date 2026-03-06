@@ -1,0 +1,38 @@
+using System;
+using System.Windows.Threading;
+
+namespace FocusPetApp.Controllers
+{
+    public class TimerController
+    {
+        public event Action<int>? Tick;
+        public event Action? Completed;
+
+        private DispatcherTimer _timer;
+        private int _remainingSeconds;
+
+        public TimerController()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += (s, e) =>
+            {
+                _remainingSeconds--;
+                Tick?.Invoke(_remainingSeconds);
+                if (_remainingSeconds <= 0)
+                {
+                    _timer.Stop();
+                    Completed?.Invoke();
+                }
+            };
+        }
+
+        public void Start(int seconds)
+        {
+            _remainingSeconds = seconds;
+            _timer.Start();
+        }
+
+        public void Stop() => _timer.Stop();
+    }
+}
