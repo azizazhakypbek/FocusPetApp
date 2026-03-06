@@ -1,0 +1,20 @@
+using System.Windows;
+using System.Windows.Controls;
+
+namespace FocusPetApp.Components
+{
+    public partial class BubbleMessage : UserControl
+    {
+        public BubbleMessage()
+        {
+            InitializeComponent();
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        public void ShowMessage(string msg)
+        {
+            BubbleText.Text = msg;
+            this.Visibility = Visibility.Visible;
+        }
+    }
+}

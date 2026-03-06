@@ -1,0 +1,81 @@
+<Window x:Class="FocusPetApp.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Focus Pet — Settings"
+        Width="360" Height="340"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Work minutes -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock Text="Work minutes:" Width="130" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtWorkMinutes" Width="70" Text="25" Margin="8,0,0,0"/>
+        </StackPanel>
+
+        <!-- Spacer -->
+        <Border Grid.Row="1"/>
+
+        <!-- Break count -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center">
+            <TextBlock Text="Breaks per session:" Width="130" VerticalAlignment="Center"/>
+            <TextBox x:Name="TxtBreakCount" Width="70" Text="2" Margin="8,0,0,0"/>
+        </StackPanel>
+
+        <!-- Spacer -->
+        <Border Grid.Row="3"/>
+
+        <!-- Color -->
+        <StackPanel Orientation="Horizontal" Grid.Row="4" VerticalAlignment="Center">
+            <TextBlock Text="Pet color:" Width="130" VerticalAlignment="Center"/>
+            <ComboBox x:Name="CmbColor" Width="140" SelectedIndex="0" Margin="8,0,0,0">
+                <ComboBoxItem Content="Mint"/>
+                <ComboBoxItem Content="Pink"/>
+                <ComboBoxItem Content="Beige"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Spacer -->
+        <Border Grid.Row="5"/>
+
+        <!-- Hat -->
+        <StackPanel Orientation="Horizontal" Grid.Row="6" VerticalAlignment="Center">
+            <TextBlock Text="Hat accessory:" Width="130" VerticalAlignment="Center"/>
+            <CheckBox x:Name="ChkHat" Content="Enabled" Margin="8,0,0,0"/>
+        </StackPanel>
+
+        <!-- Spacer -->
+        <Border Grid.Row="7"/>
+
+        <!-- Buttons row -->
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Left" Spacing="8">
+            <Button x:Name="BtnStart" Content="Start Session" Width="120" Click="BtnStart_Click"/>
+            <Button x:Name="BtnPause" Content="Pause" Width="80" Click="BtnPause_Click"/>
+            <Button x:Name="BtnSave" Content="Save" Width="80" Click="BtnSave_Click"/>
+        </StackPanel>
+
+        <!-- Info -->
+        <TextBlock Grid.Row="9" TextWrapping="Wrap" Margin="0,10,0,0" Opacity="0.7">
+            Default Pomodoro is 25/5. Break duration is fixed at 2 minutes for MVP.
+            The pet will show eye-exercise guidance during breaks.
+        </TextBlock>
+
+        <!-- Close -->
+        <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Close" Width="80" Click="BtnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

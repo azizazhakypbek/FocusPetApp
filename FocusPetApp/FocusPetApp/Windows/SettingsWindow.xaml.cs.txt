@@ -1,0 +1,103 @@
+using System;
+using System.Windows;
+using FocusPetApp.Models;
+using FocusPetApp.Services;
+
+namespace FocusPetApp.Windows
+{
+    public partial class SettingsWindow : Window
+    {
+        // Events so PetOverlayWindow can react
+        public event Action<int, int>? StartRequested; // workMinutes, breakCount
+        public event Action? PauseRequested;
+        public event Action<string, bool>? CustomizationChanged; // color, hatOn
+        public event Action<UserSettings>? SaveRequested;
+
+        private UserSettings _settings;
+
+        public SettingsWindow(UserSettings? settings = null)
+        {
+            InitializeComponent();
+            _settings = settings ?? SettingsService.Load();
+
+            // Load settings into UI
+            TxtWorkMinutes.Text = _settings.WorkMinutes.ToString();
+            TxtBreakCount.Text  = _settings.BreakCount.ToString();
+            ChkHat.IsChecked    = _settings.HatOn;
+            SetColorInCombo(_settings.PetColor);
+        }
+
+        private void SetColorInCombo(string color)
+        {
+            // Normalize
+            var c = (color ?? "Mint").Trim();
+            int idx = c.Equals("Pink", StringComparison.OrdinalIgnoreCase) ? 1 :
+                      c.Equals("Beige", StringComparison.OrdinalIgnoreCase) ? 2 : 0;
+            CmbColor.SelectedIndex = idx;
+        }
+
+        private string GetSelectedColor()
+        {
+            var item = CmbColor.SelectedItem as System.Windows.Controls.ComboBoxItem;
+            return item?.Content?.ToString() ?? "Mint";
+        }
+
+        private bool TryReadInputs(out int workMinutes, out int breaks)
+        {
+            workMinutes = 25;
+            breaks = 2;
+
+            if (!int.TryParse(TxtWorkMinutes.Text, out workMinutes) || workMinutes <= 0)
+            {
+                MessageBox.Show("Please enter a valid positive number for Work minutes.");
+                return false;
+            }
+            if (!int.TryParse(TxtBreakCount.Text, out breaks) || breaks < 0)
+            {
+                MessageBox.Show("Please enter a valid non-negative number for Breaks per session.");
+                return false;
+            }
+            return true;
+        }
+
+        private void BtnStart_Click(object sender, RoutedEventArgs e)
+        {
+            if (!TryReadInputs(out int work, out int breaks)) return;
+
+            var color = GetSelectedColor();
+            var hatOn = ChkHat.IsChecked == true;
+
+            // Notify listeners (e.g., PetOverlayWindow)
+            CustomizationChanged?.Invoke(color, hatOn);
+            StartRequested?.Invoke(work, breaks);
+        }
+
+        private void BtnPause_Click(object sender, RoutedEventArgs e)
+        {
+            PauseRequested?.Invoke();
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (!TryReadInputs(out int work, out int breaks)) return;
+
+            var color = GetSelectedColor();
+            var hatOn = ChkHat.IsChecked == true;
+
+            _settings.WorkMinutes = work;
+            _settings.BreakCount  = breaks;
+            _settings.PetColor    = color;
+            _settings.HatOn       = hatOn;
+
+            SettingsService.Save(_settings);
+            CustomizationChanged?.Invoke(color, hatOn);
+
+            MessageBox.Show("Settings saved.");
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<UserControl x:Class="FocusPetApp.Components.BubbleMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Background="#CCFFFFFF" Padding="10" CornerRadius="12"
+            BorderBrush="#99A3C3" BorderThickness="1"
+            Effect="{DynamicResource ds}">
+        <TextBlock x:Name="BubbleText" FontSize="14" Foreground="#333" />
+    </Border>
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="ds" Color="#000000" BlurRadius="8" ShadowDepth="2" Opacity="0.25"/>
+    </UserControl.Resources>
+</UserControl>
