@@ -1,0 +1,9 @@
+using System.Windows;
+
+namespace FocusPetApp
+{
+    public partial class App : Application
+    {
+    }
+}
+
