@@ -9,10 +9,10 @@ namespace FocusPetApp.Controllers
         public event Action<string>? AnimationRequested;
         public event Action? Completed;
 
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
         private int _stepIndex = 0;
 
-        private string[] _steps = new[]
+        private readonly string[] _steps = new[]
         {
             "Look left ↔ right",
             "Look up ↕ down",
@@ -21,7 +21,7 @@ namespace FocusPetApp.Controllers
             "Relax eyes"
         };
 
-        private string[] _animations = new[]
+        private readonly string[] _animations = new[]
         {
             "left_right",
             "up_down",
@@ -58,3 +58,4 @@ namespace FocusPetApp.Controllers
         }
     }
 }
+

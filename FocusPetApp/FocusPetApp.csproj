@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Controllers\*.cs.txt" />
-    <Compile Include="Models\*.cs.txt" />
-    <Compile Include="Services\*.cs.txt" />
-
     <None Update="Assets\*.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

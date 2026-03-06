@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-c:\Users\Нурлан\Documents\GitHub\FocusPetApp\FocusPetApp\obj\Debug\net8.0-windows\
+C:\Users\Нурлан\Documents\GitHub\FocusPetApp\FocusPetApp\obj\Debug\net8.0-windows\
 FocusPetApp
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-c:\Users\Нурлан\Documents\GitHub\FocusPetApp\FocusPetApp\App.xaml
+C:\Users\Нурлан\Documents\GitHub\FocusPetApp\FocusPetApp\App.xaml
 4907402966
 
-11491422848
+10-1454397242
 198205159665
 Components\BlobCat.xaml;Components\BubbleMessage.xaml;Windows\PetOverlayWindow.xaml;Windows\SettingsWindow.xaml;
 

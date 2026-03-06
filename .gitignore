@@ -1,0 +1,24 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# Build output
+bin/
+obj/
+
+# OS junk
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# Shortcuts
+*.lnk
+
+# App local data
+usersettings.json
+

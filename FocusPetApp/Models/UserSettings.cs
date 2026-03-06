@@ -8,3 +8,4 @@ namespace FocusPetApp.Models
         public bool HatOn { get; set; } = false;
     }
 }
+

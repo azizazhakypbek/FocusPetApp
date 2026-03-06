@@ -8,7 +8,7 @@ namespace FocusPetApp.Controllers
         public event Action<int>? Tick;
         public event Action? Completed;
 
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
         private int _remainingSeconds;
 
         public TimerController()
@@ -36,3 +36,4 @@ namespace FocusPetApp.Controllers
         public void Stop() => _timer.Stop();
     }
 }
+
