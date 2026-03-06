@@ -1,13 +1,53 @@
 <Window x:Class="FocusPetApp.Windows.PetOverlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:components="clr-namespace:FocusPetApp.Components"
+        Title="Focus Pet"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
         Topmost="True"
-        Width="180" Height="180">
+        Width="240" Height="240"
+        ResizeMode="NoResize"
+        KeyDown="Window_KeyDown"
+        MouseDown="Window_MouseDown">
+
     <Grid>
-        <Image x:Name="PetImage" Width="160" Height="160" />
-        <local:BubbleMessage x:Name="Bubble" Visibility="Collapsed" />
+        <!-- Subtle rounded background if you want to see bounds while testing; keep Transparent for final -->
+        <!--<Border CornerRadius="12" Background="#10FFFFFF"/>-->
+
+        <!-- The pet -->
+        <components:BlobCat x:Name="Pet"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+        <!-- Bubble message (top-left) -->
+        <components:BubbleMessage x:Name="Bubble"
+                                  Visibility="Collapsed"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Margin="8"/>
+
+        <!-- Tiny gear button to open settings -->
+        <Button x:Name="BtnOpenSettings"
+                Content="⚙"
+                FontSize="14"
+                Width="28" Height="28"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="6"
+                Background="#CCFFFFFF"
+                BorderBrush="#99A3C3"
+                BorderThickness="1"
+                Click="BtnOpenSettings_Click"
+                ToolTip="Open Settings (or press 'S')" />
+
+        <!-- Optional faint drag-hint icon (disabled by default) -->
+        <!--<TextBlock Text="⋮⋮"
+                   Opacity="0.25"
+                   FontSize="18"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="6"/>-->
     </Grid>
 </Window>
